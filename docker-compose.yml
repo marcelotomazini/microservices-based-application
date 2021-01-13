@@ -1,0 +1,19 @@
+apigateway:
+  extends:
+    file: docker-compose-common.yml
+    service: apigateway
+  links:
+    - characterservice
+    - houseservice
+
+characterservice:
+  extends:
+    file: docker-compose-common.yml
+    service: characterservice
+
+houseservice:
+  extends:
+    file: docker-compose-common.yml
+    service: houseservice
+  environment:
+    API_KEY: ${API_KEY}
