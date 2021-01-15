@@ -1,5 +1,8 @@
 zuul:  
   routes:
-    google:
-      path: /api/**
-      url: http://localhost:8090/api/v1
+    character-service:
+      path: /api/characters/**
+      url: http://localhost:8081/api/v1/characters
+    house-service:
+      path: /api/house/**
+      url: http://localhost:8082/api/v1/house

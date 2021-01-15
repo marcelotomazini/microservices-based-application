@@ -1,19 +1,27 @@
-apigateway:
-  extends:
-    file: docker-compose-common.yml
-    service: apigateway
-  links:
-    - characterservice
-    - houseservice
-
-characterservice:
-  extends:
-    file: docker-compose-common.yml
-    service: characterservice
-
-houseservice:
-  extends:
-    file: docker-compose-common.yml
-    service: houseservice
-  environment:
-    API_KEY: ${API_KEY}
+services:
+  apigateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      VERSION: 0.1.0
+      CHARACTER_SERVICE_HOST: characterservice
+      HOUSE_SERVICE_HOST: houseservice
+    links:
+      - characterservice
+      - houseservice
+  
+  characterservice:
+    build: ./microservices/character-service
+    ports:
+      - "8081:8080"
+    environment:
+      VERSION: 0.1.0
+  
+  houseservice:
+    build: ./microservices/house-service
+    ports:
+      - "8082:8080"
+    environment:
+      VERSION: 0.1.0
+      API_KEY: ${API_KEY}
