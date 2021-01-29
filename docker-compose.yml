@@ -2,7 +2,7 @@ services:
   apigateway:
     build: ./api-gateway
     ports:
-      - "8080:8080"
+      - "80:8080"
     environment:
       VERSION: 0.1.0
       CHARACTER_SERVICE_HOST: characterservice
@@ -13,15 +13,11 @@ services:
   
   characterservice:
     build: ./microservices/character-service
-    ports:
-      - "8081:8080"
     environment:
       VERSION: 0.1.0
   
   houseservice:
     build: ./microservices/house-service
-    ports:
-      - "8082:8080"
     environment:
       VERSION: 0.1.0
       API_KEY: ${API_KEY}
